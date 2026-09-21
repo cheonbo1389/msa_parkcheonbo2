@@ -12,7 +12,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/cheonbo1389/ibm05_spring_cloud_config.git
+          uri: https://github.com/cheonbo1389/ibm05_spring_cloud_config2.git
           clone-on-start: true
           # main branch
           default-label: main
