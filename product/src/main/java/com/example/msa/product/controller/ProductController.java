@@ -79,9 +79,9 @@ public class ProductController {
 
     //유저가 추가한 제품 조회
     @GetMapping("/mylist")
-    public ResponseEntity<?> myproductList(@RequestHeader("X-User-Id") String userId){
+    public ResponseEntity<?> myproductList(@RequestHeader("X-User-Id") String userId, @RequestHeader("X-User-Role") String userRole){
         System.out.println("<<< ProductController - /mylist >>>");
-
+        System.out.println("userRole : "+userRole);
         return new ResponseEntity<>(productService.myproductList(userId),HttpStatus.OK);
     }
 }

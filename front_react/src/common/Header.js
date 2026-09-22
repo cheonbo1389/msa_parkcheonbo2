@@ -27,6 +27,15 @@ const Header = () => {
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/productcreate">제품 추가</NavDropdown.Item>
                 </NavDropdown>
+
+                {/* 관리자 전용 페이지 */}
+                <NavDropdown title="관리자페이지" id="navbarScrollingDropdown">
+                    <NavDropdown.Item href="/mypage">내 정보</NavDropdown.Item>
+                    <NavDropdown.Item href="/myproductlist">내 제품</NavDropdown.Item>
+                    <NavDropdown.Item href="/orderList">주문목록</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="/productcreate">제품 추가</NavDropdown.Item>
+                </NavDropdown>
             </Nav>
             <Form className="d-flex">
                 {/* 로그인 안 되어있을 경우 */}
