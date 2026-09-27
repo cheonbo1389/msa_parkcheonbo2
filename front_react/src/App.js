@@ -15,6 +15,11 @@ import UpdateMyinfo from './pages/user/UpdateMyinfo';
 import ProtectedRoute from './common/ProtectedRoute';
 import Logout from './pages/user/Logout';
 
+
+// 2차 추가 내용
+import ProductAllow from './pages/admin/ProductAllow';
+
+
 function App() {
   return (
     <div className="App">
@@ -66,6 +71,13 @@ function App() {
 
           {/* 주문 목록 */}
           <Route path='/orderList' exact={true} element={ <ProtectedRoute><OrderList /></ProtectedRoute>} /> 
+
+
+          {/* 2차 추가 */}
+          {/* 관리자 기능 */}
+          {/* 제품 승인 페이지 */}
+          <Route path='/productallow' exact={true} element={ <ProtectedRoute><ProductAllow /></ProtectedRoute>} /> 
+
           
         </Routes>
       </BrowserRouter>

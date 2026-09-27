@@ -1,6 +1,7 @@
 package com.example.msa.product.service;
 
 import com.example.msa.product.domain.Product;
+import com.example.msa.product.domain.ProductStatus;
 import com.example.msa.product.dto.ProductRegisterDto;
 import com.example.msa.product.dto.ProductResDto;
 import com.example.msa.product.dto.ProductUpdateStockDto;
@@ -120,4 +121,14 @@ public class ProductService {
         return productRepository.findByMemberId(Long.parseLong(userId));
     }
 
+
+    public Product  productStatusAllowed(Long productId) {
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
+
+        product.updateProductStatus(ProductStatus.ALLOWED);
+
+        return product;
+    }
 }

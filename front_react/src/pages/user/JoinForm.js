@@ -41,7 +41,7 @@ const JoinForm = (props) => {
         .then((res) => {
             if(res != null){
               alert("회원가입에 성공했습니다.");
-              navigate('/home');
+              navigate('/loginForm');
             }else{
               alert("회원가입에 실패했습니다.");
             }

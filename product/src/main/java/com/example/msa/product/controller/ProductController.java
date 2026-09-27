@@ -84,4 +84,14 @@ public class ProductController {
         System.out.println("userRole : "+userRole);
         return new ResponseEntity<>(productService.myproductList(userId),HttpStatus.OK);
     }
+
+
+    // 제품 status 수정 - 비허용(DISALLOWED) -> 허용(ALLOWED)
+    @PostMapping("/productallow/{id}")
+    public ResponseEntity<?> productallow(@PathVariable Long id){
+        System.out.println("<<< ProductController - /productallow >>>");
+
+        return new ResponseEntity<>(productService.productStatusAllowed(id), HttpStatus.OK);
+    }
+
 }

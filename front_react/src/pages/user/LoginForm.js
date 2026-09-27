@@ -32,6 +32,7 @@ const LoginForm = (props) => {
           body: JSON.stringify(user)
         })
         .then((res) => {
+          console.log(res);
             if(res.status === 200){
                 return res.json();
             }else{
@@ -40,11 +41,17 @@ const LoginForm = (props) => {
         })
         .then((res) => {
             if (res != null && res.token) {
+
               // 토큰 저장
               localStorage.setItem("Token", res.token);
 
               // 리프레시 토큰 저장
               localStorage.setItem("refreshToken", res.refreshToken);
+
+              // 유저 role 저장
+              localStorage.setItem("role", res.role);
+
+
               window.location.href = "/home";
             }else{
                 alert("로그인에 실패했습니다.");

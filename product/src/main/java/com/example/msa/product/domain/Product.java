@@ -31,8 +31,18 @@ public class Product extends BaseTimeEntity {
     @Column(nullable = false)
     private Long memberId;
 
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private ProductStatus productStatus = ProductStatus.DISALLOWED;
+
+
     //재고감소
     public void updateStockQuantity(int stockQuantity){ // stockQuantity = 주문갯수
         this.stockQuantity = this.stockQuantity - stockQuantity;
+    }
+
+    //상태 변경
+    public void updateProductStatus(ProductStatus productStatus) {
+        this.productStatus = productStatus;
     }
 }

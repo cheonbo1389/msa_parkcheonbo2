@@ -63,6 +63,7 @@ public class MemberController {
 
         Map<String, Object> loginInfo = new HashMap<>();
         loginInfo.put("id", member.getId());
+        loginInfo.put("role", member.getRole());
         loginInfo.put("token", token);
         loginInfo.put("refreshToken", refreshToken);
 

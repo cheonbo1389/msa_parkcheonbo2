@@ -23,7 +23,6 @@ const ProductDetail = () => {
         }) 
         .then(res => res.json())
         .then(res => {
-            console.log(1,res);
             setProductList(res);
             
 
@@ -36,8 +35,6 @@ const ProductDetail = () => {
             }) 
             .then(res2 => res2.json())
             .then(res2 => {
-                console.log(res2);
-                
                 setMember(res2); 
             });
         });
