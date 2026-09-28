@@ -6,7 +6,7 @@ const ProductList = () => {
     const [productList, setProductList] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8081/product-service/product/list",{
+        fetch("http://localhost:8081/product-service/product/allowedlist",{
             method: "GET" 
         }) 
         .then(res => res.json())

@@ -83,6 +83,12 @@ public class ProductService {
     }
 
 
+    //Allow인 제품 조회 조회
+    public ArrayList<Product> productALLowedList(){
+        System.out.println("<<< ProductService - productALLowedList >>>");
+        ArrayList<Product> products = productRepository.findByProductStatus(ProductStatus.ALLOWED);
+        return products;
+    }
 
     @KafkaListener(topics = "update-stock-topic", containerFactory = "kafkaListener")
     public void stockConsumer(String message){
@@ -121,13 +127,27 @@ public class ProductService {
         return productRepository.findByMemberId(Long.parseLong(userId));
     }
 
-
+    // 제품 status 수정 - 비허용(DISALLOWED) -> 허용(ALLOWED)
     public Product  productStatusAllowed(Long productId) {
+        System.out.println("<<< ProductService - productStatusAllowed >>>");
+
 
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
 
         product.updateProductStatus(ProductStatus.ALLOWED);
+
+        return product;
+    }
+
+    // 제품 status 수정 - 허용(ALLOWED) -> 비허용(DISALLOWED)
+    public Product  productStatusDisAllowed(Long productId) {
+        System.out.println("<<< ProductService - productStatusDisAllowed >>>");
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
+
+        product.updateProductStatus(ProductStatus.DISALLOWED);
 
         return product;
     }

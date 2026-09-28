@@ -1,9 +1,12 @@
 package com.example.msa.member.service;
 
 import com.example.msa.member.domain.Member;
+import com.example.msa.member.domain.SellerApplication;
 import com.example.msa.member.dto.LoginDto;
 import com.example.msa.member.dto.MemberSaveReqDto;
+import com.example.msa.member.dto.SellerSaveReqDto;
 import com.example.msa.member.repository.MemberRepository;
+import com.example.msa.member.repository.SellerApplyRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,10 +19,12 @@ import java.util.Optional;
 @Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final SellerApplyRepository sellerApplyRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    public MemberService(MemberRepository memberRepository, SellerApplyRepository sellerApplyRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
+        this.sellerApplyRepository = sellerApplyRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -80,5 +85,19 @@ public class MemberService {
         System.out.println("<<< MemberService - updatemyinfo >>>");
 
         return memberRepository.save(member);
+    }
+
+
+    // 판매자 신청
+    public Long sellerapply(SellerSaveReqDto sellerSaveReqDto){
+        System.out.println("<<< MemberService - sellerapply >>>");
+        Optional<SellerApplication> optionalSellerApplication = sellerApplyRepository.findById(sellerSaveReqDto.getMemberId());
+        if (optionalSellerApplication.isPresent()){
+            throw new IllegalArgumentException("기존에 신청한 회원입니다.");
+        }
+
+        SellerApplication sellerApplication = sellerApplyRepository.save(sellerSaveReqDto.toEntity());
+
+        return sellerApplication.getId();
     }
 }

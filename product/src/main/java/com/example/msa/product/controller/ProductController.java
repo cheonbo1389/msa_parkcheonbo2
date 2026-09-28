@@ -37,6 +37,13 @@ public class ProductController {
         return new ResponseEntity<>(productService.productAllList(),HttpStatus.OK);
     }
 
+    //Allow인 제품 조회 조회
+    @GetMapping("/allowedlist")
+    public ResponseEntity<?> productAllowedList(){
+        System.out.println("<<< ProductController - /allowedlist >>>");
+
+        return new ResponseEntity<>(productService.productALLowedList(),HttpStatus.OK);
+    }
 
     //재고조회 API
     @GetMapping("{id}")
@@ -79,9 +86,8 @@ public class ProductController {
 
     //유저가 추가한 제품 조회
     @GetMapping("/mylist")
-    public ResponseEntity<?> myproductList(@RequestHeader("X-User-Id") String userId, @RequestHeader("X-User-Role") String userRole){
+    public ResponseEntity<?> myproductList(@RequestHeader("X-User-Id") String userId){
         System.out.println("<<< ProductController - /mylist >>>");
-        System.out.println("userRole : "+userRole);
         return new ResponseEntity<>(productService.myproductList(userId),HttpStatus.OK);
     }
 
@@ -94,4 +100,12 @@ public class ProductController {
         return new ResponseEntity<>(productService.productStatusAllowed(id), HttpStatus.OK);
     }
 
+
+    // 제품 status 수정 - 허용(ALLOWED) -> 비허용(DISALLOWED)
+    @PostMapping("/productdisallow/{id}")
+    public ResponseEntity<?> productdisallow(@PathVariable Long id){
+        System.out.println("<<< ProductController - /productdisallow >>>");
+
+        return new ResponseEntity<>(productService.productStatusDisAllowed(id), HttpStatus.OK);
+    }
 }

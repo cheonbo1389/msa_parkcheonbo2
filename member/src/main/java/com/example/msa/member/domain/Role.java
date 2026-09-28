@@ -1,5 +1,5 @@
 package com.example.msa.member.domain;
 
 public enum Role {
-    ADMIN, USER
+    ADMIN, USER, SELLER
 }

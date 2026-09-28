@@ -18,7 +18,7 @@ import Logout from './pages/user/Logout';
 
 // 2차 추가 내용
 import ProductAllow from './pages/admin/ProductAllow';
-
+import SellerForm from './pages/user/SellerForm';
 
 function App() {
   return (
@@ -77,8 +77,10 @@ function App() {
           {/* 관리자 기능 */}
           {/* 제품 승인 페이지 */}
           <Route path='/productallow' exact={true} element={ <ProtectedRoute><ProductAllow /></ProtectedRoute>} /> 
+          {/* 판매자 등록 페이지 */}
+          <Route path='/sellerform' exact={true} element={ <ProtectedRoute><SellerForm /></ProtectedRoute>} /> 
 
-          
+
         </Routes>
       </BrowserRouter>
     </div>

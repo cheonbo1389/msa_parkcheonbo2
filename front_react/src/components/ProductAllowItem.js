@@ -30,10 +30,10 @@ const ProductAllowItem = (props) => {
         })
         .then((res) => {
             if(res != null){
-                alert("제품 허가 변경에 성공했습니다.");
+                alert("제품 판매 허용에 성공했습니다.");
                 window.location.reload();
             }else{
-              alert("제품 허가 변경에 실패했습니다.");
+              alert("제품 판매 허용에 실패했습니다.");
             }
         })
         .catch((error) => {
@@ -43,7 +43,32 @@ const ProductAllowItem = (props) => {
     }
 
     const changeStatusToDisAllowed = () => {
-        
+                fetch("http://localhost:8081/product-service/product/productdisallow/"+id,{
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json"
+                ,"Authorization": `Bearer ${token}`
+            }
+        })
+        .then((res) => {
+            if(res.status === 200){
+                return res.json();
+            }else{
+                return null;
+            }   
+        })
+        .then((res) => {
+            if(res != null){
+                alert("제품 판매 비허용에 성공했습니다.");
+                window.location.reload();
+            }else{
+              alert("제품 판매 비허용에 실패했습니다.");
+            }
+        })
+        .catch((error) => {
+            console.log('실패', error);
+            
+        })
     }
 
     return (

@@ -5,6 +5,7 @@ import com.example.msa.member.domain.Member;
 import com.example.msa.member.dto.LoginDto;
 import com.example.msa.member.dto.MemberRefreshDto;
 import com.example.msa.member.dto.MemberSaveReqDto;
+import com.example.msa.member.dto.SellerSaveReqDto;
 import com.example.msa.member.service.JwtTokenProvider;
 import com.example.msa.member.service.MemberService;
 import io.jsonwebtoken.Claims;
@@ -111,6 +112,22 @@ public class MemberController {
     }
 
 
+    // 판매자 신청 요청
+    @PostMapping("/sellerapply")
+    public ResponseEntity<?> sellerapply(@RequestHeader("X-User-Role") String userRole,
+            @RequestBody SellerSaveReqDto sellerSaveReqDto) {
+        System.out.println("<<< MemberController - /sellerapply >>>");
+//        ROLE_USER
+
+        System.out.println(userRole+"/"+sellerSaveReqDto);
+
+
+        if (userRole.equals("ROLE_SELLER")){
+            throw new IllegalArgumentException("판매자 신청 권한이 없습니다.");
+        }
+
+        return new ResponseEntity<>(memberService.sellerapply(sellerSaveReqDto), HttpStatus.OK);
+    }
 
     @PostMapping("/refresh-token")
     public ResponseEntity<?> generateNewAt(@RequestBody MemberRefreshDto dto){
