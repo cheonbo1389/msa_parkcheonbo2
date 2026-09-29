@@ -29,4 +29,9 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private Role role = Role.USER;
+
+    //Role 변경
+    public void updateRole(Role role) {
+        this.role = role;
+    }
 }

@@ -11,11 +11,15 @@ import lombok.NoArgsConstructor;
 @Data
 public class SellerSaveReqDto {
     private Long memberId;
+    private String name;
+    private String email;
     private String category;
 
     public SellerApplication toEntity(){
         return SellerApplication.builder()
                 .memberId(memberId)
+                .name(name)
+                .email(email)
                 .category(category)
                 .build();
     }

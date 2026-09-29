@@ -129,6 +129,40 @@ public class MemberController {
         return new ResponseEntity<>(memberService.sellerapply(sellerSaveReqDto), HttpStatus.OK);
     }
 
+    // 판매자 신청자 전체 조회
+    @GetMapping("/sellerlist")
+    public ResponseEntity<?> sellerlist(){
+        System.out.println("<<< MemberController - /sellerlist >>>");
+
+        return new ResponseEntity<>(memberService.sellerList(), HttpStatus.OK);
+    }
+
+    //멤버 Role -> SELLER, Selller Status -> ALLOWED 으로 변경
+    @PutMapping("/sellerallow/{memberId}")
+    public ResponseEntity<?> sellerallow(@PathVariable Long memberId){
+        System.out.println("<<< MemberController - /sellerallow >>>");
+
+        return new ResponseEntity<>(memberService.sellerallow(memberId), HttpStatus.OK);
+    }
+
+    //판매자 비허가
+    @PutMapping("/sellerdisallow/{id}")
+    public ResponseEntity<?> sellerdisallow(@PathVariable Long id){
+        System.out.println("<<< MemberController - /sellerdisallow >>>");
+
+        //204 리턴
+        return new ResponseEntity<>(memberService.sellerdisallow(id), HttpStatus.NO_CONTENT);
+    }
+
+    // 일반 사용자로 전환
+    @PutMapping("/changetouser/{memberId}")
+    public ResponseEntity<?> changeToCommonUser(@PathVariable Long memberId){
+        System.out.println("<<< MemberController - /changeToCommonUser >>>");
+        memberService.changeToCommonUser(memberId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/refresh-token")
     public ResponseEntity<?> generateNewAt(@RequestBody MemberRefreshDto dto){
         System.out.println("<<< MemberController - /refresh-token >>>");

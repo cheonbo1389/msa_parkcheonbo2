@@ -14,6 +14,8 @@ const SellerForm = () => {
     
     const [seller, setSeller ] = useState({
         memberId : '',
+        name: '',
+        email: '',
         category : ''
     });
     
@@ -36,6 +38,8 @@ const SellerForm = () => {
         setSeller({
             ...seller,
             memberId : myinfo.Id,
+            name : myinfo.name,
+            email : myinfo.email,
             [e.target.name] : e.target.value
         });
     }

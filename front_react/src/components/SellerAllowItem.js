@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import {Card} from 'react-bootstrap';
 import { Button} from 'react-bootstrap';
 
-const ProductAllowItem = (props) => {
-    const  { id, name, price, productStatus, stockQuantity} = props.product
-    const member = props.member; 
+const SellerAllowItem = (props) => {
+    const {id, category, status, memberId} = props.seller;
     const token = localStorage.getItem("Token");
     const statusText = {
         ALLOWED: "허용",
         DISALLOWED: "비허용",
+        PENDING: "신청"
     };
 
     const changeStatusToAllowed = (e) => {
-        fetch("http://localhost:8081/product-service/product/productallow/"+id,{
-            method : "POST",
+        fetch("http://localhost:8081/member-service/member/sellerallow/"+memberId,{
+            method : "PUT",
             headers: {
                 "Content-Type": "application/json"
                 ,"Authorization": `Bearer ${token}`
@@ -29,10 +29,10 @@ const ProductAllowItem = (props) => {
         })
         .then((res) => {
             if(res != null){
-                alert("제품 판매 허용에 성공했습니다.");
+                alert("판매자 전환을 허가했습니다.");
                 window.location.reload();
             }else{
-              alert("제품 판매 허용에 실패했습니다.");
+              alert("판매자 전환을 실패했습니다.");
             }
         })
         .catch((error) => {
@@ -42,15 +42,16 @@ const ProductAllowItem = (props) => {
     }
 
     const changeStatusToDisAllowed = () => {
-                fetch("http://localhost:8081/product-service/product/productdisallow/"+id,{
-            method : "POST",
+                fetch("http://localhost:8081/member-service/member/sellerdisallow/"+id,{
+            method : "PUT",
             headers: {
                 "Content-Type": "application/json"
                 ,"Authorization": `Bearer ${token}`
             }
         })
         .then((res) => {
-            if(res.status === 200){
+            if(res.status === 204){
+                
                 return res.json();
             }else{
                 return null;
@@ -58,10 +59,10 @@ const ProductAllowItem = (props) => {
         })
         .then((res) => {
             if(res != null){
-                alert("제품 판매 비허용에 성공했습니다.");
+                alert("판매자 전환 신청을 비허가했습니다.");
                 window.location.reload();
             }else{
-              alert("제품 판매 비허용에 실패했습니다.");
+              alert("판매자 전환 신청을 비허가를 실패했습니다.");
             }
         })
         .catch((error) => {
@@ -74,16 +75,11 @@ const ProductAllowItem = (props) => {
         <div>
             <Card>
                 <Card.Body>               
-                    <Card.Title>제품번호 : {id}</Card.Title>
-                    <Card.Title>제품명 : {name}</Card.Title>
-                    <Card.Title>제품가격 : {price}</Card.Title>
-                    <Card.Title>재고 : {stockQuantity}</Card.Title>
-                    <Card.Title>제품 허가 상태 : {statusText[productStatus]}</Card.Title>
-                    <Card.Title>판매자 : {member?.name}</Card.Title>
-
-
-                    <Button variant="primary" className="me-3" onClick={changeStatusToAllowed}>허용</Button>
-                    <Button variant="danger" className="me-3" onClick={changeStatusToDisAllowed}>비허용</Button>
+                    <Card.Title>신청번호 : {id}</Card.Title>
+                    <Card.Title>제품 카테고리 : {category}</Card.Title>
+                    <Card.Title>허가 상태 : {statusText[status]}</Card.Title>
+                    <Button variant="primary" className="me-3" onClick={changeStatusToAllowed} disabled={status === "ALLOWED" || status === "DISALLOWED"}>허가</Button>
+                    <Button variant="danger" className="me-3" onClick={changeStatusToDisAllowed} disabled={status === "ALLOWED" || status === "DISALLOWED"}>비허가</Button>
                     
                     </Card.Body>
             </Card>
@@ -92,4 +88,4 @@ const ProductAllowItem = (props) => {
     );
 };
 
-export default ProductAllowItem;
+export default SellerAllowItem;

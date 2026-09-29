@@ -19,6 +19,9 @@ import Logout from './pages/user/Logout';
 // 2차 추가 내용
 import ProductAllow from './pages/admin/ProductAllow';
 import SellerForm from './pages/user/SellerForm';
+import SellerAllow from './pages/admin/SellerAllow';
+import CheckRole from './common/CheckRole'; // 판매 권한 체크(제품 추가시)
+
 
 function App() {
   return (
@@ -58,7 +61,7 @@ function App() {
           <Route path='/product/:id' exact={true} element={ <ProtectedRoute> <ProductDetail /> </ProtectedRoute>} /> 
 
           {/* 제품 추가 */}
-          <Route path='/productcreate' exact={true} element={ <ProtectedRoute><ProductCreate /></ProtectedRoute>} /> 
+          <Route path='/productcreate' exact={true} element={ <ProtectedRoute><CheckRole><ProductCreate /></CheckRole></ProtectedRoute>} /> 
 
           {/* 제품 수정 페이지 */}
           <Route path='/updateProduct/:id' exact={true} element={ <ProtectedRoute><ProductUpdate /></ProtectedRoute>} />
@@ -77,8 +80,12 @@ function App() {
           {/* 관리자 기능 */}
           {/* 제품 승인 페이지 */}
           <Route path='/productallow' exact={true} element={ <ProtectedRoute><ProductAllow /></ProtectedRoute>} /> 
+          
           {/* 판매자 등록 페이지 */}
           <Route path='/sellerform' exact={true} element={ <ProtectedRoute><SellerForm /></ProtectedRoute>} /> 
+          
+          {/* 판매자 등록 페이지 */}
+          <Route path='/sellerallow' exact={true} element={ <ProtectedRoute><SellerAllow /></ProtectedRoute>} /> 
 
 
         </Routes>

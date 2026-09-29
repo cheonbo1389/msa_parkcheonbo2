@@ -34,7 +34,8 @@ const ProductCreate = () => {
         .then((res) => {
             if (res.status === 201) {
                 return res.json();
-            } else {
+            }
+             else {
                 throw new Error(`상품 등록 실패: ${res.status}`);
             }
         })
@@ -44,7 +45,11 @@ const ProductCreate = () => {
         })
         .catch((error) => {
             console.error("실패:", error);
-            alert("제품 추가에 실패했습니다.");
+            if (error.message.includes("403")) {
+                alert("판매 권한이 없습니다.");
+            } else {
+                alert("제품 추가에 실패했습니다.");
+            }
         });
     }
 

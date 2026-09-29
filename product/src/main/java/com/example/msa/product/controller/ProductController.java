@@ -21,8 +21,13 @@ public class ProductController {
 
     //제품 추가
     @PostMapping("/create")
-    public ResponseEntity<?> productCreate(@RequestBody ProductRegisterDto dto, @RequestHeader("X-User-Id") String userId){
+    public ResponseEntity<?> productCreate(@RequestBody ProductRegisterDto dto, @RequestHeader("X-User-Id") String userId, @RequestHeader("X-User-Role") String userRole){
         System.out.println("<<< ProductController - /create >>>");
+
+        if (userRole.equals("ROLE_USER")){
+//            403 전달
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
 
         Product product = productService.productCreate(dto, userId);
         return new ResponseEntity<>(product.getId(), HttpStatus.CREATED);

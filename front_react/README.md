@@ -23,8 +23,10 @@ CREATE TABLE `member` (
 CREATE TABLE `seller_application` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `member_id` bigint(20) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `status` enum('ALLOWED', 'DISALLOWED') DEFAULT NULL,
+  `status` enum('ALLOWED', 'DISALLOWED', 'PENDING') DEFAULT NULL,
   `created_time` datetime(6) NOT NULL,
   `updated_time` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
@@ -123,7 +125,7 @@ CREATE TABLE `seller_application` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `member_id` bigint(20) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `status` enum('ALLOWED', 'DISALLOWED') DEFAULT NULL,
+  `status` enum('ALLOWED', 'DISALLOWED', 'PENDING') DEFAULT NULL,
   `created_time` datetime(6) NOT NULL,
   `updated_time` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
@@ -148,9 +150,17 @@ SellerForm.js
 >> 완료
 
 남은거
-관리자가 판매자 허용
-판매자가 아닐때, 제품 추가 기능 접근시 접근 불가로 하기
+>> 신청자 이름, 이메일도 db에 같이 넣는 방식으로 변경?
+>> 테이블 변경완료
+>> 백, 프론트 변경 완료
 
+관리자가 판매자 허용
+>> 완료
+>> 허가/비허가시 버튼 비활성화 시키는 것 추가했음
+>> 일반 user로 바꾸는 방식을 따로 추가해야할듯? >> 기능은 만들었음. >> 프론트 추가해야함
+
+판매자가 아닐때, 제품 추가 기능 접근시 접근 불가로 하기
+>> 완료
 
 -----------------------------------------------------------------
 - 문의하기/답변

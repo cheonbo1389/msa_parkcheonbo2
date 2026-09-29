@@ -1,7 +1,9 @@
 package com.example.msa.member.service;
 
 import com.example.msa.member.domain.Member;
+import com.example.msa.member.domain.Role;
 import com.example.msa.member.domain.SellerApplication;
+import com.example.msa.member.domain.Status;
 import com.example.msa.member.dto.LoginDto;
 import com.example.msa.member.dto.MemberSaveReqDto;
 import com.example.msa.member.dto.SellerSaveReqDto;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -92,12 +95,53 @@ public class MemberService {
     public Long sellerapply(SellerSaveReqDto sellerSaveReqDto){
         System.out.println("<<< MemberService - sellerapply >>>");
         Optional<SellerApplication> optionalSellerApplication = sellerApplyRepository.findById(sellerSaveReqDto.getMemberId());
-        if (optionalSellerApplication.isPresent()){
-            throw new IllegalArgumentException("기존에 신청한 회원입니다.");
-        }
 
         SellerApplication sellerApplication = sellerApplyRepository.save(sellerSaveReqDto.toEntity());
 
         return sellerApplication.getId();
     }
+
+    //판매자 리스트 조회
+    public ArrayList<SellerApplication> sellerList(){
+        System.out.println("<<< MemberService - sellerList >>>");
+
+        return (ArrayList<SellerApplication>) sellerApplyRepository.findAll();
+    }
+
+    //판매자 허가
+    public Long sellerallow(Long memberId){
+        System.out.println("<<< MemberService - sellerallow >>>");
+
+        Member member = memberRepository.findById(memberId).get();
+
+        member.updateRole(Role.SELLER);
+
+        SellerApplication sellerApplication = sellerApplyRepository.findBymemberId(memberId);
+        sellerApplication.updateStatus(Status.ALLOWED);
+
+        return sellerApplication.getId();
+    }
+
+    //판매자 비허가
+    public Long sellerdisallow(Long id){
+        System.out.println("<<< MemberService - sellerdisallow >>>");
+
+        SellerApplication sellerApplication = sellerApplyRepository.findById(id).get();
+        sellerApplication.updateStatus(Status.DISALLOWED);
+
+        return sellerApplication.getId();
+    }
+
+
+    //일반 사용자로 전환
+    public void changeToCommonUser(Long memberId){
+        System.out.println("<<< MemberService - changeToCommonUser >>>");
+        Member member = memberRepository.findById(memberId).get();
+
+        member.updateRole(Role.USER);
+
+        SellerApplication sellerApplication = sellerApplyRepository.findBymemberId(memberId);
+        sellerApplyRepository.deleteById(sellerApplication.getId());
+    }
+
 }

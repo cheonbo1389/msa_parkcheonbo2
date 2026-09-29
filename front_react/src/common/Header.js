@@ -28,14 +28,14 @@ const Header = () => {
                     <NavDropdown.Item href="/orderList">주문목록</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/productcreate">제품 추가</NavDropdown.Item>
+                    <NavDropdown.Item href="/sellerform">판매자 신청 페이지</NavDropdown.Item>
                 </NavDropdown>
 
                 {/* 관리자 전용 페이지 */}
                 {token && role === 'ADMIN' && (<>
                 <NavDropdown title="관리자페이지" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="/productallow">제품 승인 페이지</NavDropdown.Item>
-                    <NavDropdown.Item href="/sellerform">판매자 승인 페이지</NavDropdown.Item>
-                    <NavDropdown.Item href="/orderList">주문목록</NavDropdown.Item>
+                    <NavDropdown.Item href="/sellerallow">판매자 허가 페이지</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/productcreate">제품 추가</NavDropdown.Item>
                 </NavDropdown>
