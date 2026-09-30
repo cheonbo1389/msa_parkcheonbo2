@@ -4,12 +4,23 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="com.example.member" target="21" />
+      <module name="com.example.member.main" target="21" />
+      <module name="com.example.member.test" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="apigateway" options="-parameters" />
       <module name="apigateway.main" options="-parameters" />
       <module name="apigateway.test" options="-parameters" />
+      <module name="com.example.member" options="-parameters" />
+      <module name="com.example.member.main" options="-parameters" />
+      <module name="com.example.member.test" options="-parameters" />
+      <module name="community" options="-parameters" />
+      <module name="community.main" options="-parameters" />
+      <module name="community.test" options="-parameters" />
       <module name="configserver" options="-parameters" />
       <module name="configserver.main" options="-parameters" />
       <module name="configserver.test" options="-parameters" />

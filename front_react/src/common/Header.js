@@ -36,6 +36,7 @@ const Header = () => {
                 <NavDropdown title="관리자페이지" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="/productallow">제품 승인 페이지</NavDropdown.Item>
                     <NavDropdown.Item href="/sellerallow">판매자 허가 페이지</NavDropdown.Item>
+                     <NavDropdown.Item href="/memberrole">회원 권한 강제 전환</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/productcreate">제품 추가</NavDropdown.Item>
                 </NavDropdown>

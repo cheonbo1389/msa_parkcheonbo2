@@ -21,7 +21,8 @@ import ProductAllow from './pages/admin/ProductAllow';
 import SellerForm from './pages/user/SellerForm';
 import SellerAllow from './pages/admin/SellerAllow';
 import CheckRole from './common/CheckRole'; // 판매 권한 체크(제품 추가시)
-
+import MemberRole from './pages/admin/MemberRole';
+import Notice from './pages/community/Notice';
 
 function App() {
   return (
@@ -87,7 +88,12 @@ function App() {
           {/* 판매자 등록 페이지 */}
           <Route path='/sellerallow' exact={true} element={ <ProtectedRoute><SellerAllow /></ProtectedRoute>} /> 
 
+          {/* 멤버 Role 강제 변경 페이지 */}
+          <Route path='/memberrole' exact={true} element={ <ProtectedRoute><MemberRole /></ProtectedRoute>} /> 
 
+          <Route path='/notice' exact={true} element={ <Notice /> }/> 
+
+          
         </Routes>
       </BrowserRouter>
     </div>

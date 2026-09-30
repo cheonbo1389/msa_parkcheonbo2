@@ -90,6 +90,13 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+    //멤버 전체 조회
+    public ArrayList<Member> allMemberList(){
+        System.out.println("<<< MemberService - allMemberList >>>");
+
+        return memberRepository.findByRoleNot(Role.ADMIN);
+    }
+
 
     // 판매자 신청
     public Long sellerapply(SellerSaveReqDto sellerSaveReqDto){
@@ -109,15 +116,14 @@ public class MemberService {
     }
 
     //판매자 허가
-    public Long sellerallow(Long memberId){
+    public Long sellerallow(Long id){
         System.out.println("<<< MemberService - sellerallow >>>");
 
-        Member member = memberRepository.findById(memberId).get();
-
-        member.updateRole(Role.SELLER);
-
-        SellerApplication sellerApplication = sellerApplyRepository.findBymemberId(memberId);
+        SellerApplication sellerApplication = sellerApplyRepository.findById(id).get();
         sellerApplication.updateStatus(Status.ALLOWED);
+
+        Member member = memberRepository.findById(sellerApplication.getMemberId()).get();
+        member.updateRole(Role.SELLER);
 
         return sellerApplication.getId();
     }
@@ -140,8 +146,14 @@ public class MemberService {
 
         member.updateRole(Role.USER);
 
-        SellerApplication sellerApplication = sellerApplyRepository.findBymemberId(memberId);
-        sellerApplyRepository.deleteById(sellerApplication.getId());
     }
 
+    //판매자로 전환
+    public void changeToSeller(Long memberId){
+        System.out.println("<<< MemberService - changeToSeller >>>");
+        Member member = memberRepository.findById(memberId).get();
+
+        member.updateRole(Role.SELLER);
+
+    }
 }

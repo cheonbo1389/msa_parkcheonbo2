@@ -16,7 +16,7 @@ public interface ProductFeign {
 
     //제품 재고 조회
     @GetMapping("/product/{productId}")
-    ProductDto getProductbyId(@PathVariable Long productId, @RequestHeader("X-User-Id") String userId); //productId 두 개가 일채해야함
+    ProductDto getProductbyId(@PathVariable Long productId, @RequestHeader("X-User-Id") String userId); //productId 두 개가 일치해야함
 
     //제품 수량 업데이트
     @PutMapping("/product/updatestock")

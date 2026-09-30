@@ -4,7 +4,7 @@ import {Card} from 'react-bootstrap';
 import { Button} from 'react-bootstrap';
 
 const SellerAllowItem = (props) => {
-    const {id, category, status, memberId} = props.seller;
+    const {id, name, email ,category, status, memberId} = props.seller;
     const token = localStorage.getItem("Token");
     const statusText = {
         ALLOWED: "허용",
@@ -13,7 +13,7 @@ const SellerAllowItem = (props) => {
     };
 
     const changeStatusToAllowed = (e) => {
-        fetch("http://localhost:8081/member-service/member/sellerallow/"+memberId,{
+        fetch("http://localhost:8081/member-service/member/sellerallow/"+id,{
             method : "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -22,6 +22,7 @@ const SellerAllowItem = (props) => {
         })
         .then((res) => {
             if(res.status === 200){
+
                 return res.json();
             }else{
                 return null;
@@ -76,6 +77,9 @@ const SellerAllowItem = (props) => {
             <Card>
                 <Card.Body>               
                     <Card.Title>신청번호 : {id}</Card.Title>
+                    <Card.Title>회원번호 : {memberId}</Card.Title>
+                    <Card.Title>이름 : {name}</Card.Title>
+                    <Card.Title>이메일 : {email}</Card.Title>
                     <Card.Title>제품 카테고리 : {category}</Card.Title>
                     <Card.Title>허가 상태 : {statusText[status]}</Card.Title>
                     <Button variant="primary" className="me-3" onClick={changeStatusToAllowed} disabled={status === "ALLOWED" || status === "DISALLOWED"}>허가</Button>

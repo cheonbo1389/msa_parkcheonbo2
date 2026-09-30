@@ -41,6 +41,9 @@ const LoginForm = (props) => {
         })
         .then((res) => {
             if (res != null && res.token) {
+              console.log(res);
+              
+              alert(res);
 
               // 토큰 저장
               localStorage.setItem("Token", res.token);

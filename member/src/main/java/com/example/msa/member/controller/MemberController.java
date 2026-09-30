@@ -112,15 +112,23 @@ public class MemberController {
     }
 
 
+    // 멤버 전체 리스트 조회
+    @GetMapping("/allmemberlist")
+    public ResponseEntity<?> allMemberList(@RequestHeader("X-User-Role") String userRole){
+        System.out.println("<<< MemberController - /allmemberlist >>>");
+
+        if (!userRole.equals("ROLE_ADMIN")){
+            return new ResponseEntity<>("권한없음", HttpStatus.FORBIDDEN);
+        }
+
+        return new ResponseEntity<>(memberService.allMemberList(), HttpStatus.OK);
+    }
+
     // 판매자 신청 요청
     @PostMapping("/sellerapply")
     public ResponseEntity<?> sellerapply(@RequestHeader("X-User-Role") String userRole,
             @RequestBody SellerSaveReqDto sellerSaveReqDto) {
         System.out.println("<<< MemberController - /sellerapply >>>");
-//        ROLE_USER
-
-        System.out.println(userRole+"/"+sellerSaveReqDto);
-
 
         if (userRole.equals("ROLE_SELLER")){
             throw new IllegalArgumentException("판매자 신청 권한이 없습니다.");
@@ -138,11 +146,11 @@ public class MemberController {
     }
 
     //멤버 Role -> SELLER, Selller Status -> ALLOWED 으로 변경
-    @PutMapping("/sellerallow/{memberId}")
-    public ResponseEntity<?> sellerallow(@PathVariable Long memberId){
+    @PutMapping("/sellerallow/{id}")
+    public ResponseEntity<?> sellerallow(@PathVariable Long id){
         System.out.println("<<< MemberController - /sellerallow >>>");
 
-        return new ResponseEntity<>(memberService.sellerallow(memberId), HttpStatus.OK);
+        return new ResponseEntity<>(memberService.sellerallow(id), HttpStatus.OK);
     }
 
     //판매자 비허가
@@ -160,7 +168,15 @@ public class MemberController {
         System.out.println("<<< MemberController - /changeToCommonUser >>>");
         memberService.changeToCommonUser(memberId);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("일반회원전환완료",HttpStatus.OK);
+    }
+
+    @PutMapping("/changetoseller/{memberId}")
+    public ResponseEntity<?> changeToSeller(@PathVariable Long memberId){
+        System.out.println("<<< MemberController - /changetoseller >>>");
+        memberService.changeToSeller(memberId);
+
+        return new ResponseEntity<>("판매자전환완료",HttpStatus.OK);
     }
 
     @PostMapping("/refresh-token")
