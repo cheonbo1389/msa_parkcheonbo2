@@ -30,6 +30,15 @@ public class Notice extends BaseTimeEntity {
     @Column(nullable = false)
     private NoticeCategory noticecategory;
 
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
     //Category 변경
     public void updateNoticeCategory (NoticeCategory noticecategory) {
         this.noticecategory = noticecategory;

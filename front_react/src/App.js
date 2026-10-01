@@ -23,6 +23,12 @@ import SellerAllow from './pages/admin/SellerAllow';
 import CheckRole from './common/CheckRole'; // 판매 권한 체크(제품 추가시)
 import MemberRole from './pages/admin/MemberRole';
 import Notice from './pages/community/Notice';
+import NoticeDetail from './pages/community/NoticeDetail';
+import NoticeCreate from './pages/community/NoticeCreate';
+import NoticeAdmin from './pages/community/NoticeAdmin';
+import NoticeDetailAdmin from './pages/community/NoticeDetailAdmin';
+import NoticeUpdate from './pages/community/NoticeUpdate';
+
 
 function App() {
   return (
@@ -91,9 +97,26 @@ function App() {
           {/* 멤버 Role 강제 변경 페이지 */}
           <Route path='/memberrole' exact={true} element={ <ProtectedRoute><MemberRole /></ProtectedRoute>} /> 
 
+          {/* 전체 공지 페이지 */}
           <Route path='/notice' exact={true} element={ <Notice /> }/> 
 
+          {/* 공지 상세 페이지 */}
+          <Route path='/notice/:id' exact={true} element={ <NoticeDetail /> }/> 
+
+          {/* 공지 추가 페이지 */}
+          <Route path='/noticecreate' exact={true} element={ <ProtectedRoute><NoticeCreate /></ProtectedRoute>} /> 
+        
+          {/* 관리자용 공지 페이지 */}
+          <Route path='/noticeadmin' exact={true} element={ <ProtectedRoute><NoticeAdmin /></ProtectedRoute> }/> 
           
+          {/* 관리자용 공지 상세 페이지 */}
+          <Route path='/noticeadmin/:id' exact={true} element={<ProtectedRoute><NoticeDetailAdmin /></ProtectedRoute>  }/> 
+
+          {/* 공지 수정 페이지 */}
+          <Route path='/noticeupdate/:id' exact={true} element={ <ProtectedRoute><NoticeUpdate /></ProtectedRoute> }/> 
+          
+
+
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,0 +1,11 @@
+.notice-title {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notice-title a {
+    color: inherit;
+    text-decoration: none;
+}

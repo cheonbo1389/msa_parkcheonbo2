@@ -27,7 +27,8 @@ public class JwtAuthFilter implements GlobalFilter {   // neti 기반의 비동�
             "/member/refresh-token",   // 토큰갱신
             "/product/list",  // 상품목록은 회원이 아니어도 조회가능하도록
             "/product/allowedlist",
-            "/notice/allnotice"
+            "/notice/allnotice",
+            "^/notice/\\d+$"
     );
 
     // 1) cors(CorsWebFilter) : application.yml    → 2) token검증(GlobalFilter)     →  3) 라우팅 처리(GatewayFilter)
@@ -43,6 +44,13 @@ public class JwtAuthFilter implements GlobalFilter {   // neti 기반의 비동�
         // 인증이 필요 없는 경로는 필터를 통과
         if (ALLOWED_PATHS.contains(path)) {
             return chain.filter(exchange); // => 세번째 라우팅처리로 간다
+        }
+
+        // 2차 플젝 추가 - 20261001에 추가됨
+        // 공지 상세 조회 토큰 검증 필터 통과 시키기
+        // ALLOWED_PATHS.contains(path)는 문자열 검사라 이런 방식으로 통과 시켜야함
+        if (path.matches("^/notice/\\d+$")) {
+            return chain.filter(exchange);
         }
 
         // 인증이 필요한 모든 코드는 아래 token filter로 넘어감, 토큰이 없는데 토큰을 검증할 경우 에러발생

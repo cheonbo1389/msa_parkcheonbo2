@@ -105,7 +105,6 @@ public class ProductController {
         return new ResponseEntity<>(productService.productStatusAllowed(id), HttpStatus.OK);
     }
 
-
     // 제품 status 수정 - 허용(ALLOWED) -> 비허용(DISALLOWED)
     @PostMapping("/productdisallow/{id}")
     public ResponseEntity<?> productdisallow(@PathVariable Long id){

@@ -35,5 +35,33 @@ public class NoticeService {
         return (ArrayList<Notice>) noticeRepository.findAll();
     }
 
+    //공지글 상세 조회
+    public Notice getNoticeDetail(Long id){
+        System.out.println("<<< NoticeService - getNoticeDetail >>>");
+
+        return noticeRepository.findById(id).get();
+    }
+
+    //공지글 수정
+    public Long updateNotice(Long id, NoticeSaveReqDto dto) {
+
+        System.out.println("<<< NoticeService - updateNotice >>>");
+
+        Notice notice = noticeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 공지입니다."));
+
+        notice.updateTitle(dto.getTitle());
+        notice.updateContent(dto.getContent());
+        notice.updateNoticeCategory(dto.getNoticecategory());
+
+        return notice.getId();
+    }
+
+    //공지글 삭제
+    public void deleteNotice(Long id){
+        System.out.println("<<< NoticeService - deleteNotice >>>");
+
+        noticeRepository.deleteById(id);
+    }
 }
 

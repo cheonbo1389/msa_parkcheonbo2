@@ -6,7 +6,7 @@ import '../../css/notice.css';
 
 
 
-const Notice = () => {
+const NoticeAdmin = () => {
     const [noticeList, setNoticeList] = useState([]);
     const navigate = useNavigate();
     const typeText = {
@@ -42,6 +42,8 @@ const Notice = () => {
                         <th>분류</th>
                         <th>제목</th>
                         <th>날짜</th>
+                        <th></th>
+                        <th></th>
                         </tr>
                 </thead>
                 <tbody>    
@@ -63,7 +65,7 @@ const Notice = () => {
                     .map(notice =>
                         <tr
                             key={notice.id}
-                            onClick={() => navigate(`/notice/${notice.id}`)}
+                            onClick={() => navigate(`/noticeadmin/${notice.id}`)}
                         >
                             <td>{notice.id}</td>
                             <td>{typeText[notice.noticecategory]}</td>
@@ -83,4 +85,4 @@ const Notice = () => {
     );
 };
 
-export default Notice;
+export default NoticeAdmin;
