@@ -1,0 +1,17 @@
+span.inquiry-badge {
+    font-size: 0.9rem;
+    padding: 7px 12px;
+}
+
+
+.inquiry-title {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inquiry-title a {
+    color: inherit;
+    text-decoration: none;
+}

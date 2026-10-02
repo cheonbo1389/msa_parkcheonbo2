@@ -23,7 +23,7 @@ const NoticeDetailAdmin = () => {
 
 
     const toNotice = () => {
-        navigate("/notice");
+        navigate("/noticeadmin");
     }
 
     const updateNotice = () => {
@@ -58,7 +58,7 @@ const NoticeDetailAdmin = () => {
         })
         .then((res)  => {
             alert("공지글 삭제에 성공했습니다.");
-            navigate("/notice");
+            navigate("/noticeadmin");
         })
         .catch((error) => {
             console.error("실패:", error);

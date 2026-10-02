@@ -65,6 +65,11 @@ const NoticeUpdate = () => {
         });
     }
 
+    //이전 페이지로
+    const backpage = () => {
+        navigate(-1);
+    }
+
     if (!notice) {
         return <div><Container>기존 공지 내용을 불러오는 중...</Container></div>;
     }
@@ -90,6 +95,7 @@ const NoticeUpdate = () => {
                     <Form.Label>내용</Form.Label>
                     <Form.Control as="textarea" rows={10} placeholder="공지 내용을 입력해주세요" onChange={changeValue} name="content" value={notice.content} />
                 </Form.Group>
+                <Button variant="warning" className="me-3" onClick={backpage}>이전페이지로</Button>
                 <Button variant="success" className="me-3" type="submit">작성</Button>   
             </Form>
             </Container>

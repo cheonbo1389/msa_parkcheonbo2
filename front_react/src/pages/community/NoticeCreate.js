@@ -45,7 +45,7 @@ const NoticeCreate = () => {
         })
         .then((res)  => {
             alert("공지글 등록에 성공했습니다.");
-            navigate("/notice");
+            navigate("/noticeadmin");
         })
         .catch((error) => {
             console.error("실패:", error);

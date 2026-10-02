@@ -28,6 +28,10 @@ const Notice = () => {
     }, [])
 
 
+    if (!noticeList) {
+        return <div><Container>공지사항을 불러오는 중...</Container></div>;
+    }
+
     return (
     <div>
         <Container>

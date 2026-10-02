@@ -26,7 +26,7 @@ public class NoticeController {
 
         if (!userRole.equals("ROLE_ADMIN")){
 //            403 전달
-            return new ResponseEntity<>("권한없음",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(userRole,HttpStatus.FORBIDDEN);
         }
 
         noticeSaveReqDto.setAdminid(Long.valueOf(adminId));
@@ -78,6 +78,6 @@ public class NoticeController {
 
         noticeService.deleteNotice(id);
 
-        return new ResponseEntity<>("삭제완료",HttpStatus.OK);
+        return new ResponseEntity<>(id,HttpStatus.OK);
     }
 }

@@ -256,7 +256,59 @@ community 서버 추가
 
 >> 관리자만 형태 다른 페이지 추가중 >> 완료
 공지 수정 >> 완료
-공지 삭제 >> 기능완료. 프론트 리턴 받는부분 수정해야함
+공지 삭제 >> 기능완료. 프론트 리턴 받는부분 수정해야함 >> 수정 완료
 
-문의하기
-답변
+-----------------------------------------------------------------------------------
+문의하기/답변
+ ├─ inquiry 
+ │   ├─ Inquiry
+ │   ├─ Answer
+ │   └─ inquirystatus
+ │
+
+
+문의 ddl
+CREATE TABLE inquiry (
+  id bigint(20) NOT NULL AUTO_INCREMENT,
+  title varchar(255) NOT NULL,
+  content TEXT NOT NULL,
+  userid bigint(20) NOT NULL,
+  inquirystatus enum('NOTANSWERED', 'ANSWERED') NOT NULL,
+  created_time datetime(6) NOT NULL,
+  updated_time datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+답변 ddl
+CREATE TABLE answer (
+  id bigint(20) NOT NULL AUTO_INCREMENT,
+  title varchar(255) NOT NULL,
+  content TEXT NOT NULL,
+  adminid bigint(20) NOT NULL,
+  inquiryid bigint(20) NOT NULL,
+  created_time datetime(6) NOT NULL,
+  updated_time datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+
+
+문의하기 기능
+- 생성
+>> 백엔드 완료
+>> 프론트 완료
+
+- 내 문의 전체 조회
+>> 백엔드 완료
+>> 프론트 완료
+
+- 내 문의 상세 조회
+>> 백엔드 완료
+>> 프론트 완료
+
+답변 기능
+- 생성
+>> 백엔드 완료
+
+- 조회
+- 수정
+- 삭제

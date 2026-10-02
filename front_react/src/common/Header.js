@@ -28,7 +28,9 @@ const Header = () => {
                     <NavDropdown.Item href="/mypage">내 정보</NavDropdown.Item>
                     <NavDropdown.Item href="/myproductlist">내 제품</NavDropdown.Item>
                     <NavDropdown.Item href="/orderList">주문목록</NavDropdown.Item>
+                    <NavDropdown.Item href="/myinquiry">문의목록</NavDropdown.Item>
                     <NavDropdown.Divider />
+                    <NavDropdown.Item href="/createinquiry">문의하기</NavDropdown.Item>
                     <NavDropdown.Item href="/productcreate">제품 추가</NavDropdown.Item>
                     <NavDropdown.Item href="/sellerform">판매자 신청 페이지</NavDropdown.Item>
                 </NavDropdown>

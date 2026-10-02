@@ -28,7 +28,9 @@ import NoticeCreate from './pages/community/NoticeCreate';
 import NoticeAdmin from './pages/community/NoticeAdmin';
 import NoticeDetailAdmin from './pages/community/NoticeDetailAdmin';
 import NoticeUpdate from './pages/community/NoticeUpdate';
-
+import InquiryList from './pages/inquiry/InquiryList';
+import Inquiry from './pages/inquiry/Inquiry';
+import InquiryCreate from './pages/inquiry/InquiryCreate';
 
 function App() {
   return (
@@ -115,7 +117,14 @@ function App() {
           {/* 공지 수정 페이지 */}
           <Route path='/noticeupdate/:id' exact={true} element={ <ProtectedRoute><NoticeUpdate /></ProtectedRoute> }/> 
           
-
+          {/* 전체 내 문의 페이지 */}
+          <Route path='/myinquiry' exact={true} element={ <ProtectedRoute><InquiryList /></ProtectedRoute> }/> 
+                  
+          {/* 내 문의 상세 페이지 */}
+          <Route path='/inquiry/:id' exact={true} element={ <ProtectedRoute><Inquiry /></ProtectedRoute> }/> 
+          
+          <Route path='/createinquiry' exact={true} element={ <ProtectedRoute><InquiryCreate /></ProtectedRoute> }/> 
+          
 
         </Routes>
       </BrowserRouter>
