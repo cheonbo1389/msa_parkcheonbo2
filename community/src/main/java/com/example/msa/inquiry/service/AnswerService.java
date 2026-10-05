@@ -33,4 +33,38 @@ public class AnswerService {
 
         return answer.getId();
     }
+
+    //문의 답변 조회
+    public Answer getAnswer(Long inquiryid){
+        System.out.println("<<< AnswerService - saveAnswer >>>");
+
+        return answerRepository.findByInquiryid(inquiryid);
+    }
+
+    //문의 답변 수정
+    public Long updateAnswer(AnswerSaveReqDto answerSaveReqDto){
+        System.out.println("<<< AnswerService - updateAnswer >>>");
+
+        Answer answer = answerRepository.findByInquiryid(answerSaveReqDto.getInquiryid());
+        answer.updateTitle(answerSaveReqDto.getTitle());
+        answer.updateContent(answerSaveReqDto.getContent());
+
+        return answer.getId();
+    }
+
+
+    //문의 답변 삭제
+    public Long deleteAnswer(Long answerId){
+        System.out.println("<<< AnswerService - deleteAnswer >>>");
+        Answer answer = answerRepository.findById(answerId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 답변입니다."));
+        Inquiry inquiry = inquiryRepository.findById(answer.getInquiryid())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 문의입니다."));
+
+        inquiry.updateInquirystatus(Inquirystatus.NOTANSWERED);
+
+        answerRepository.deleteById(answerId);
+
+        return answerId;
+    }
 }

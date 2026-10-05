@@ -1,6 +1,7 @@
 package com.example.msa.inquiry.controller;
 
 
+import com.example.msa.inquiry.domain.Answer;
 import com.example.msa.inquiry.dto.AnswerSaveReqDto;
 import com.example.msa.inquiry.service.AnswerService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,5 +36,40 @@ public class AnswerController {
         return new ResponseEntity<>(answerService.saveAnswer(answerSaveReqDto), HttpStatus.CREATED);
     }
 
+    //문의 답변 조회
+    @GetMapping("/selectanswer")
+    public ResponseEntity<?> answerGet(@RequestBody Long inquiryid){
+        System.out.println("<<< AnswerController - /selectanswer >>>");
 
+        return new ResponseEntity<>(answerService.getAnswer(inquiryid), HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> answerUpdate(@RequestHeader("X-User-Id") String userid,
+                                          @RequestHeader("X-User-Role") String userRole,
+                                          @RequestBody AnswerSaveReqDto answerSaveReqDto){
+        System.out.println("<<< AnswerController - /update >>>");
+
+        if (!userRole.equals("ROLE_ADMIN")){
+//            403 전달
+            return new ResponseEntity<>(userRole,HttpStatus.FORBIDDEN);
+        }
+
+        answerSaveReqDto.setAdminid(Long.valueOf(userid));
+        return new ResponseEntity<>(answerService.updateAnswer(answerSaveReqDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> answerDelete(@RequestHeader("X-User-Role") String userRole,
+                                          @RequestBody Long answerId){
+        System.out.println("<<< AnswerController - /delete >>>");
+
+        if (!userRole.equals("ROLE_ADMIN")){
+//            403 전달
+            return new ResponseEntity<>(userRole,HttpStatus.FORBIDDEN);
+        }
+
+
+        return new ResponseEntity<>(answerService.deleteAnswer(answerId), HttpStatus.OK);
+    }
 }
