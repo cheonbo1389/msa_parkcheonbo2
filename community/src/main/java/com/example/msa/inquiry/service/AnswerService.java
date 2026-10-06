@@ -36,9 +36,16 @@ public class AnswerService {
 
     //문의 답변 조회
     public Answer getAnswer(Long inquiryid){
-        System.out.println("<<< AnswerService - saveAnswer >>>");
+        System.out.println("<<< AnswerService - getAnswer >>>");
 
         return answerRepository.findByInquiryid(inquiryid);
+    }
+
+//   답변 존재 확인
+    public boolean existsAnswer(Long inquiryid) {
+        System.out.println("<<< AnswerService - existsAnswer >>>");
+
+        return answerRepository.existsByInquiryid(inquiryid);
     }
 
     //문의 답변 수정
@@ -54,17 +61,16 @@ public class AnswerService {
 
 
     //문의 답변 삭제
-    public Long deleteAnswer(Long answerId){
+    public Long deleteAnswer(Long inquiryid){
         System.out.println("<<< AnswerService - deleteAnswer >>>");
-        Answer answer = answerRepository.findById(answerId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 답변입니다."));
+        Answer answer = answerRepository.findByInquiryid(inquiryid);
         Inquiry inquiry = inquiryRepository.findById(answer.getInquiryid())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 문의입니다."));
 
         inquiry.updateInquirystatus(Inquirystatus.NOTANSWERED);
 
-        answerRepository.deleteById(answerId);
+        answerRepository.deleteByInquiryid(inquiryid);
 
-        return answerId;
+        return inquiryid;
     }
 }

@@ -31,6 +31,10 @@ import NoticeUpdate from './pages/community/NoticeUpdate';
 import InquiryList from './pages/inquiry/InquiryList';
 import Inquiry from './pages/inquiry/Inquiry';
 import InquiryCreate from './pages/inquiry/InquiryCreate';
+import InquiryAdmin from './pages/inquiry/InquiryAdmin';
+import AnswerList from './pages/answer/AnswerList';
+import AnswerCreate from './pages/answer/AnswerCreate';
+import AnswerUpdate from './pages/answer/AnswerUpdate';
 
 function App() {
   return (
@@ -123,8 +127,21 @@ function App() {
           {/* 내 문의 상세 페이지 */}
           <Route path='/inquiry/:id' exact={true} element={ <ProtectedRoute><Inquiry /></ProtectedRoute> }/> 
           
+          {/* 문의 작성 페이지 */}
           <Route path='/createinquiry' exact={true} element={ <ProtectedRoute><InquiryCreate /></ProtectedRoute> }/> 
           
+          {/* 관리자용 문의 상세 페이지 */}
+          <Route path='/inquiryadmin/:id' exact={true} element={ <ProtectedRoute><InquiryAdmin /></ProtectedRoute> }/> 
+          
+          {/* 전체 문의/답변 페이지 */}
+          <Route path='/answerlist' exact={true} element={ <ProtectedRoute><AnswerList /></ProtectedRoute> }/> 
+
+          {/* 답변 작성 페이지 */}
+          <Route path='/createanswer/:id' exact={true} element={ <ProtectedRoute><AnswerCreate /></ProtectedRoute> }/> 
+          
+          {/* 답변 수정 페이지 */}
+          <Route path='/updateanswer/:id' exact={true} element={ <ProtectedRoute><AnswerUpdate /></ProtectedRoute> }/> 
+
 
         </Routes>
       </BrowserRouter>

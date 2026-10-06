@@ -28,7 +28,7 @@ const Header = () => {
                     <NavDropdown.Item href="/mypage">내 정보</NavDropdown.Item>
                     <NavDropdown.Item href="/myproductlist">내 제품</NavDropdown.Item>
                     <NavDropdown.Item href="/orderList">주문목록</NavDropdown.Item>
-                    <NavDropdown.Item href="/myinquiry">문의목록</NavDropdown.Item>
+                    <NavDropdown.Item href="/myinquiry">내 문의목록</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/createinquiry">문의하기</NavDropdown.Item>
                     <NavDropdown.Item href="/productcreate">제품 추가</NavDropdown.Item>
@@ -42,8 +42,10 @@ const Header = () => {
                     <NavDropdown.Item href="/sellerallow">판매자 허가 페이지</NavDropdown.Item>
                     <NavDropdown.Item href="/memberrole">회원 권한 강제 전환</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/noticeadmin">관리자용 공지</NavDropdown.Item>
                     <NavDropdown.Item href="/noticecreate">공지 추가</NavDropdown.Item>
+                    <NavDropdown.Item href="/noticeadmin">관리자용 공지</NavDropdown.Item>
+                    <NavDropdown.Item href="/answerlist">문의/답변</NavDropdown.Item>
+                    
                 </NavDropdown>
                 </>)}
             </Nav>

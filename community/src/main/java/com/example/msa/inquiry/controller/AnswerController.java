@@ -31,17 +31,23 @@ public class AnswerController {
             return new ResponseEntity<>(userRole,HttpStatus.FORBIDDEN);
         }
 
+        // 이미 답변이 존재하는지 확인
+        if (answerService.existsAnswer(answerSaveReqDto.getInquiryid())) {
+            //409 Conflict(충돌)
+            return new ResponseEntity<>(answerSaveReqDto.getInquiryid(), HttpStatus.CONFLICT);
+        }
+
         answerSaveReqDto.setAdminid(Long.valueOf(userid));
 
         return new ResponseEntity<>(answerService.saveAnswer(answerSaveReqDto), HttpStatus.CREATED);
     }
 
     //문의 답변 조회
-    @GetMapping("/selectanswer")
-    public ResponseEntity<?> answerGet(@RequestBody Long inquiryid){
+    @GetMapping("/selectanswer/{id}")
+    public ResponseEntity<?> answerGet(@PathVariable Long id){
         System.out.println("<<< AnswerController - /selectanswer >>>");
 
-        return new ResponseEntity<>(answerService.getAnswer(inquiryid), HttpStatus.OK);
+        return new ResponseEntity<>(answerService.getAnswer(id), HttpStatus.OK);
     }
 
     @PutMapping("/update")
@@ -55,13 +61,12 @@ public class AnswerController {
             return new ResponseEntity<>(userRole,HttpStatus.FORBIDDEN);
         }
 
-        answerSaveReqDto.setAdminid(Long.valueOf(userid));
         return new ResponseEntity<>(answerService.updateAnswer(answerSaveReqDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> answerDelete(@RequestHeader("X-User-Role") String userRole,
-                                          @RequestBody Long answerId){
+                                          @PathVariable Long id){
         System.out.println("<<< AnswerController - /delete >>>");
 
         if (!userRole.equals("ROLE_ADMIN")){
@@ -70,6 +75,6 @@ public class AnswerController {
         }
 
 
-        return new ResponseEntity<>(answerService.deleteAnswer(answerId), HttpStatus.OK);
+        return new ResponseEntity<>(answerService.deleteAnswer(id), HttpStatus.OK);
     }
 }

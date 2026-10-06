@@ -13,6 +13,10 @@ const ProductAllowItem = (props) => {
     };
 
     const changeStatusToAllowed = (e) => {
+        if (!window.confirm("제품 판매를 허용하시겠습니까?")) {
+            return;
+        }
+
         fetch("http://localhost:8081/product-service/product/productallow/"+id,{
             method : "POST",
             headers: {
@@ -42,7 +46,11 @@ const ProductAllowItem = (props) => {
     }
 
     const changeStatusToDisAllowed = () => {
-                fetch("http://localhost:8081/product-service/product/productdisallow/"+id,{
+        if (!window.confirm("제품 판매를 비허용하시겠습니까?")) {
+            return;
+        }
+
+        fetch("http://localhost:8081/product-service/product/productdisallow/"+id,{
             method : "POST",
             headers: {
                 "Content-Type": "application/json"

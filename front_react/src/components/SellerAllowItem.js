@@ -13,6 +13,10 @@ const SellerAllowItem = (props) => {
     };
 
     const changeStatusToAllowed = (e) => {
+        if (!window.confirm("판매자 전환을 허가하시겠습니까?")) {
+            return;
+        }
+
         fetch("http://localhost:8081/member-service/member/sellerallow/"+id,{
             method : "PUT",
             headers: {
@@ -43,7 +47,11 @@ const SellerAllowItem = (props) => {
     }
 
     const changeStatusToDisAllowed = () => {
-                fetch("http://localhost:8081/member-service/member/sellerdisallow/"+id,{
+        if (!window.confirm("판매자 전환을 비허가하시겠습니까?")) {
+            return;
+        }
+
+        fetch("http://localhost:8081/member-service/member/sellerdisallow/"+id,{
             method : "PUT",
             headers: {
                 "Content-Type": "application/json"
